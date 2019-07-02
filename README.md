@@ -26,6 +26,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 - Conta o número de vidas de cada jogador e subtrai a cada ship_hit_px. Controlando dessa forma o Game over.
 - Checa se zerou o número de naves inimigas (living_ships) e controla a passagem de nível a partir disso.
 - Controla o clock do movimento da nave do player, das naves inimigas e dos tiros (através de contadores de tempo).
+- Se o pulso "enemy_in_base" estiver em alto, as naves inimigas chegaram na base (nível dos players), ou seja, GAME OVER.
 
 #### Entradas
 - ship_hit_p1 : `INTEGER`
@@ -33,6 +34,8 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 - fired_p1 : `STD_LOGIC`
 - fired_p2 : `STD_LOGIC`
 - living_ships : `INTEGER`
+- enemy_in_base : `STD_LOGIC`
+
 #### Saídas
 - game_status : `INTEGER - 2 bits`
 - level : `INTEGER - 3 bits`
@@ -110,6 +113,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 - Movimenta as fileiras de inimigos a cada "enemy_clock".
 - Recebe o inteiro "enemy_ship_hit" (qual inimigo foi acertado) e altera no vetor a posição desse inimigo para -1, representando que ele morreu.
 - A cada acerto de nave inimiga, diminui 1 em living_ships (contador de inimigos vivos).
+- verifica se as naves chegaram ao nível do dos players (base). Se eles chegarem, deve enviar um pulso "enemy_in_base" (game over).
 #### Entradas
 - enemy_ship_clock : `STD_LOGIC`
 - level : `INTEGER`
@@ -118,6 +122,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 - enemy_ships_x : `INTEGER_VECTOR`
 - enemy_ships_y : `INTEGER_VECTOR`
 - living_ships : `INTEGER`
+- enemy_in_base : `STD_LOGIC`
 
 ### Enemy shot controllers
 #### Descrição

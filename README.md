@@ -29,8 +29,8 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 - Se o pulso "enemy_in_base" estiver em alto, as naves inimigas chegaram na base (nível dos players), ou seja, GAME OVER.
 
 #### Entradas
-- ship_hit_p1 : `INTEGER`
-- ship_hit_p2 : `INTEGER`
+- ship_hit_p1 : `STD_LOGIC`
+- ship_hit_p2 : `STD_LOGIC`
 - fired_p1 : `STD_LOGIC`
 - fired_p2 : `STD_LOGIC`
 - living_ships : `INTEGER`

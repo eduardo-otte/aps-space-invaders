@@ -5,10 +5,10 @@ USE ieee.numeric_std.all;
 
 ENTITY score_controller IS
     PORT(
-        clk : IN STD_LOGIC,
-        level : IN INTEGER,
-        enemy_ship_hit_p1 : IN STD_LOGIC,
-        enemy_ship_hit_p2 : IN STD_LOGIC,
+        clk : IN STD_LOGIC;
+        level : IN INTEGER;
+        enemy_ship_hit_p1 : IN STD_LOGIC;
+        enemy_ship_hit_p2 : IN STD_LOGIC;
         score : OUT INTEGER
     );
 END;

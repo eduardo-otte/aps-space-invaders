@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
 USE ieee.numeric_std.all;
 
-ENTITY input_controller IS
+ENTITY temp IS
     PORT(
         clk : IN STD_LOGIC;
         move_l : IN STD_LOGIC;
@@ -14,7 +14,7 @@ ENTITY input_controller IS
     );
 END;
 
-ARCHITECTURE input_controller OF input_controller IS
+ARCHITECTURE input_controller OF temp IS
     COMPONENT debounce
 	  GENERIC(
 		 counter_size  :  INTEGER := 23); --counter size (19 bits gives 10.5ms with 50MHz clock)
@@ -64,12 +64,12 @@ BEGIN
     PROCESS(clk)
     BEGIN
         IF rising_edge(clk) THEN
-            IF deb_move_l = '1' and deb_move_r = '0' THEN
+            IF move_l_deb = '1' and move_r_deb = '0' THEN
                 movement_signal <= -1;
-            ELSIF deb_move_l = '0' and deb_move_r = '1' THEN
+            ELSIF move_l_deb = '0' and move_r_deb = '1' THEN
                 movement_signal <= 1;
-            ELSIF (deb_move_l = '0' and deb_move_r = '0') 
-            or (deb_move_l = '1' and deb_move_r = '1') THEN
+            ELSIF (move_l_deb = '0' and move_r_deb = '0') 
+            or (move_l_deb = '1' and move_r_deb = '1') THEN
                 movement_signal <= 0;
             END IF;
 

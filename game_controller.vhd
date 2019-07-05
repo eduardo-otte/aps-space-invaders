@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
-ENTITY temp IS
+ENTITY game_controller IS
     GENERIC(
         INITIAL_PLAYER_LIVES : INTEGER := 3
     );
@@ -27,7 +27,7 @@ ENTITY temp IS
     );
 END;
 
-ARCHITECTURE temp OF temp IS
+ARCHITECTURE game_controller OF game_controller IS
     signal game_status_signal : INTEGER := 0;
     signal lives_p1_signal : INTEGER := INITIAL_PLAYER_LIVES;
     signal lives_p2_signal : INTEGER := INITIAL_PLAYER_LIVES;
@@ -62,7 +62,7 @@ BEGIN
 
             -- ***GAME OVER*** conditions
             IF ((lives_p1_signal = 0 and lives_p2_signal = 0) or enemy_in_base = '1') THEN
-                game_status <= 3;
+                game_status_signal <= 3;
             END IF;
         END IF;
     END PROCESS;

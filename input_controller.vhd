@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
 USE ieee.numeric_std.all;
 
-ENTITY temp IS
+ENTITY input_controller IS
     PORT(
         clk : IN STD_LOGIC;
         move_l : IN STD_LOGIC;
@@ -14,7 +14,7 @@ ENTITY temp IS
     );
 END;
 
-ARCHITECTURE input_controller OF temp IS
+ARCHITECTURE input_controller OF input_controller IS
     COMPONENT debounce
 	  GENERIC(
 		 counter_size  :  INTEGER := 23); --counter size (19 bits gives 10.5ms with 50MHz clock)

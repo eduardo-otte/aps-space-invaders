@@ -27,6 +27,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 - Checa se zerou o número de naves inimigas (living_ships) e controla a passagem de nível a partir disso.
 - Controla o clock do movimento da nave do player, das naves inimigas e dos tiros (através de contadores de tempo).
 - Se o pulso "enemy_in_base" estiver em alto, as naves inimigas chegaram na base (nível dos players), ou seja, GAME OVER.
+- `game_status`: 0 = "Shoot to start", 1 = "Game in progress", 2 = "Level transition", 3 = "Game over"
 
 #### Entradas
 - ship_hit_p1 : `STD_LOGIC`
@@ -99,6 +100,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 ### Player buzzer controllers
 #### Descrição
 - Envia uma frequência para o buzzer no inicio do jogo, no final do jogo, acerto de um inimigo, acerto da nave do player e a cada tiro disparado pelo player.
+- `game_status`: see `game_controller` definition
 #### Entradas
 - game_status : `INTEGER`
 - enemy_ship_hit_px : `STD_LOGIC`
@@ -170,6 +172,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 ### Light controller
 #### Descrição
 - Controla um led RGB que indicará o status do jogo e piscará quando o jogador for atingido.
+- `game_status`: see `game_controller` definition
 #### Entradas
 - game_status : `INTEGER - 2 bits`
 - ship_hit_p1 : `STD_LOGIC`
@@ -180,6 +183,7 @@ APS da disciplina de Lógica Reconfigurável - Space Invaders para 2 jogadores e
 
 ### Display controller
 - Mostra tudo no display através do cabo VGA
+- `game_status`: see `game_controller` definition
 #### Entradas
 - game_status : `INTEGER - 2 bits`
 - level : `INTEGER - 3 bits`

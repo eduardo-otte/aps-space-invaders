@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 
-ENTITY light_controller IS
+ENTITY teste IS
 	 GENERIC(
 		  counter_size  :  INTEGER := 21 --counter size (19 bits gives 10.5ms with 50MHz clock)
 	 );
@@ -20,7 +20,7 @@ ENTITY light_controller IS
     );
 END;
 
-ARCHITECTURE light_controller OF light_controller IS
+ARCHITECTURE teste OF teste IS
     SIGNAL light_p1_signal : STD_LOGIC_VECTOR(2 DOWNTO 0);
     SIGNAL light_p2_signal : STD_LOGIC_VECTOR(2 DOWNTO 0);
 	 SIGNAL counter_out : STD_LOGIC_VECTOR(counter_size DOWNTO 0) := (OTHERS => '0'); --counter output
@@ -49,9 +49,9 @@ BEGIN
 					 ELSIF(ship_hit_p2 = '1') THEN
 						  light_p2_signal(2) <= '1';
 						  counter_out <= (OTHERS => '0');
-					 END IF
+					 END IF;
 					 
-					 IF(counter_out(counter_size) = '1')
+					 IF(counter_out(counter_size) = '1') THEN
 						  light_p1_signal(2) <= '0';
 						  light_p2_signal(2) <= '0';
 						  counter_out <= (OTHERS => '0');
@@ -66,7 +66,7 @@ BEGIN
 				
             iF (game_status = 2) THEN
 					 counter_out <= counter_out + 1;
-					 if(counter_out(counter_size) = '1')
+					 IF(counter_out(counter_size) = '1') THEN
 						  light_p1_signal(0) <= light_p1_signal(1);
 						  light_p2_signal(1) <= light_p1_signal(0);
 						  counter_out <= (OTHERS => '0');

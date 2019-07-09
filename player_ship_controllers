@@ -1,0 +1,59 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+USE ieee.numeric_std.all;
+
+ENTITY player_ship_controllers IS
+    PORT(
+		movement : IN INTEGER
+        player_ship_clk : IN STD_LOGIC;
+        ship_hit : IN STD_LOGIC;
+		min_screen_size_x : IN INTEGER := 0;
+		max_screen_size_x : IN INTEGER := 900;
+		
+        ship_x : OUT INTEGER;
+		ship_y : OUT INTEGER;
+        
+    );
+END;
+
+ARCHITECTURE player_ship_controllers of player_ship_controllers IS
+	
+	signal ship_x_signal : INTEGER := 0;
+	signal ship_y_signal : INTEGER := 0;
+
+BEGIN
+
+	ship_x <= ship_x_signal;
+	ship_y <= ship_y_signal;
+	
+	
+PROCESS(CLK,player_ship_clk)
+
+	
+BEGIN
+	if rising_edge(clk) then
+
+		if ((movement = -1) and (ship_x_signal > min_screen_size_x))
+			ship_x_signal = ship_x_signal - 1;
+		elsif ((movement = 1 ) and (ship_x_signal < max_screen_size_x))
+			ship_x_signal = ship_x_signal + 1;
+		end if;
+		
+		if (ship_hit = '1')
+			ship_x_signal <= (max_screen_size_x)/2;
+		end if;
+		
+	end if;
+	
+end process;
+end ARCHITECTURE;
+
+	
+	
+	
+
+	
+	
+
+	

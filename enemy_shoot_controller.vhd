@@ -43,6 +43,7 @@ BEGIN
 					for i in 0 to NUM_MAX_SHOOT-1 loop
 						volatile_enemy_shots_x(i) := -1;
 						volatile_enemy_shots_y(i) := -1;
+						number_of_shoots_at_screen := 0;
 					end loop;
 				end if;
 				
@@ -71,7 +72,14 @@ BEGIN
 					for i in 0 to NUM_MAX_SHOOT-1 loop
 						if volatile_enemy_shots_y(i) > 0 then
 							volatile_enemy_shots_y(i) := volatile_enemy_shots_y(i) - 1;
+							-- Check if enemy bullet left screen and remove it from the array
+							if volatile_enemy_shots_y(i) < 10 then
+								volatile_enemy_shots_y(i) := -1;
+								volatile_enemy_shots_x(i) := -1;
+								number_of_shoots_at_screen := number_of_shoots_at_screen - 1;
+							end if;
 						end if;
+						
 					end loop;
 				end if;
 			end if;

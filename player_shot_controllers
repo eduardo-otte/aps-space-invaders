@@ -1,0 +1,61 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+USE ieee.numeric_std.all;
+
+ENTITY player_shot_controllers IS
+    PORT(
+		shot_clock : IN STD_LOGIC;
+        enemy_ship_hit : IN STD_LOGIC;
+        fired : IN STD_LOGIC;
+		ship_x : IN INTEGER;
+        ship_y : IN INTEGER;
+		max_screen_size_y : IN INTEGER := 900;
+		
+		fired_buzzer : OUT STD_LOGIC;
+		shot_x : OUT INTEGER;
+		shot_y : OUT INTEGER;
+		
+    );
+END;
+
+ARCHITECTURE player_shot_controllers of player_shot_controllers IS
+
+	signal fired_buzzer_signal : STD_LOGIC := '0';
+	signal shot_x_signal : OUT INTEGER;
+	signal shot_y_signal : OUT INTEGER;		
+
+BEGIN
+
+	fired_buzzer <= fired_buzzer_signal;
+	shot_x <= shot_x_signal;
+	shot_y <= shot_y_signal;
+	
+PROCESS(clk,shot_clock)
+	BEGIN
+
+		if rising_edge(CLK) then
+			
+			if(fired = '1')
+				shot_x_signal <= ship_x;
+				shot_y_signal <= ship_y;
+				fired_buzzer_signal <= '1';
+			end if;
+			
+			fired_buzzer_signal <= '0';
+			
+			for(i = ship_y ;i < max_screen_size_y; i+1)
+				shot_y_signal <= shot_y_signal + 1;
+				if(enemy_ship_hit = '1')
+					i <= max_screen_size_y;
+				end if;
+			end
+			
+		end if;
+	 end process;
+ 
+end architecture;
+ 
+	
+
+	

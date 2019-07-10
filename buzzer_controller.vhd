@@ -20,12 +20,12 @@ END ENTITY;
 
 ARCHITECTURE buzzer_controller OF buzzer_controller IS
     signal prev_game_status : INTEGER := 0;
-    signal time_counter : INTEGER(0 to COUNTER_SIZE) := 0;
+    signal time_counter : INTEGER := 0;
     signal sound_half_period : INTEGER := 50 * (CLOCK_FREQUENCY / 1000);
     signal sound_cycles_counter : INTEGER := 0;
     signal sound_cycles : INTEGER;
     signal play_sound : STD_LOGIC := '0';
-    signal buzzer_control_signal : OUT STD_LOGIC := '0';
+    signal buzzer_control_signal : STD_LOGIC := '0';
 BEGIN
     buzzer_control <= buzzer_control_signal;
 
@@ -51,41 +51,41 @@ BEGIN
             ELSE
                 IF game_status = 1 THEN
                     -- Jogador disparou
-                    IF fired_buzzer = '1'
+                    IF fired_buzzer = '1' THEN
                         sound_half_period <= 4900000; -- G3
                         time_counter <= 0;
                         sound_cycles <= 196;
                         sound_cycles_counter <= 0;
                         play_sound <= '1';
                     -- Jogador foi alvejado
-                    ELSIF ship_hit = '1'
+                    ELSIF ship_hit = '1' THEN
                         sound_half_period <= 7778250; -- D#4
                         time_counter <= 0;
                         sound_cycles <= 310;
                         sound_cycles_counter <= 0;
                         play_sound <= '1';
                     -- Inimigo foi alvejado
-                    ELSIF enemy_ship_hit = '1'
+                    ELSIF enemy_ship_hit = '1' THEN
                         sound_half_period <= 11000000; -- A4
                         time_counter <= 0;
                         sound_cycles <= 440;
                         sound_cycles_counter <= 0;
                         play_sound <= '1';
                     END IF;
-                ELSIF game_status = 1 and prev_game_status != 1 THEN
+                ELSIF game_status = 1 and prev_game_status /= 1 THEN
                     sound_half_period <= 9800000; -- G4
                     time_counter <= 0;
                     sound_cycles <= 1568;
                     sound_cycles_counter <= 0;
                     play_sound <= '1';
-                ELSIF game_status = 3 and prev_game_status != 3 THEN
+                ELSIF game_status = 3 and prev_game_status /= 3 THEN
                     sound_half_period <= 11654000; -- Bb4
                     time_counter <= 0;
                     sound_cycles <= 1865;
                     sound_cycles_counter <= 0;
                     play_sound <= '1';
                 ELSE
-                    play_sound = '0';
+                    play_sound <= '0';
                 END IF;
             END IF;
 

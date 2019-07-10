@@ -21,18 +21,31 @@ END ENTITY;
 ARCHITECTURE buzzer_controller OF buzzer_controller IS
     signal prev_game_status : INTEGER := 0;
     signal time_counter : INTEGER(0 to COUNTER_SIZE) := 0;
-    signal sound_period : INTEGER := 50 * (CLOCK_FREQUENCY / 1000);
+    signal sound_half_period : INTEGER := 50 * (CLOCK_FREQUENCY / 1000);
     signal sound_cycles_counter : INTEGER := 0;
     signal sound_cycles : INTEGER;
     signal play_sound : STD_LOGIC := '0';
+    signal buzzer_control_signal : OUT STD_LOGIC := '0';
 BEGIN
+    buzzer_control <= buzzer_control_signal;
+
     -- Inicio do jogo, final do jogo, acerto de um inimigo, acerto da nave do player e a cada tiro disparado pelo player.
     PROCESS(clk)
     BEGIN
         IF rising_edge(clk) THEN
             -- Toca o som
-            IF play_sound = '1' and time_counter < sound_period / 2 THEN
-
+            IF play_sound = '1' THEN
+                IF sound_cycles_counter < sound_cycles THEN
+                    IF time_counter >= sound_half_period THEN
+                        buzzer_control_signal <= not buzzer_control_signal;
+                        sound_cycles_counter <= sound_cycles_counter + 1;
+                        time_counter <= 0;
+                    ELSE
+                        time_counter <= time_counter + 1;
+                    END IF;
+                ELSE
+                    play_sound <= '0';
+                END IF;
             -- Verifica entradas e define qual som tocar
             ELSE
                 IF game_status = 1 THEN

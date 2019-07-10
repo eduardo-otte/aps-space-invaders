@@ -10,7 +10,7 @@ ENTITY buzzer_controller IS
     ); 
     PORT(
         clk : IN STD_LOGIC;
-        game_status : IN INTEGER;
+        game_status : IN INTEGER RANGE -10 TO 1200;
         enemy_ship_hit : IN STD_LOGIC;
         ship_hit : IN STD_LOGIC;
         fired_buzzer : IN STD_LOGIC;
@@ -19,11 +19,11 @@ ENTITY buzzer_controller IS
 END ENTITY;
 
 ARCHITECTURE buzzer_controller OF buzzer_controller IS
-    signal prev_game_status : INTEGER := 0;
-    signal time_counter : INTEGER := 0;
-    signal sound_half_period : INTEGER := 50 * (CLOCK_FREQUENCY / 1000);
-    signal sound_cycles_counter : INTEGER := 0;
-    signal sound_cycles : INTEGER;
+    signal prev_game_status : INTEGER RANGE -10 TO 1200 := 0;
+    signal time_counter : INTEGER RANGE 0 TO 50000000 := 0;
+    signal sound_half_period : INTEGER RANGE 0 TO 50000000:= 50 * (CLOCK_FREQUENCY / 1000);
+    signal sound_cycles_counter : INTEGER RANGE 0 TO 4095 := 0;
+    signal sound_cycles : INTEGER RANGE 0 TO 4095;
     signal play_sound : STD_LOGIC := '0';
     signal buzzer_control_signal : STD_LOGIC := '0';
 BEGIN

@@ -30,6 +30,7 @@ BEGIN
     buzzer_control <= buzzer_control_signal;
 
     -- Inicio do jogo, final do jogo, acerto de um inimigo, acerto da nave do player e a cada tiro disparado pelo player.
+    -- Todas os períodos calculados p/ clock @ 50 MHz
     PROCESS(clk)
     BEGIN
         IF rising_edge(clk) THEN
@@ -51,18 +52,38 @@ BEGIN
                 IF game_status = 1 THEN
                     -- Jogador disparou
                     IF fired_buzzer = '1'
-                        -- TIRO!
+                        sound_half_period <= 4900000; -- G3
+                        time_counter <= 0;
+                        sound_cycles <= 196;
+                        sound_cycles_counter <= 0;
+                        play_sound <= '1';
                     -- Jogador foi alvejado
                     ELSIF ship_hit = '1'
-                        -- PAIN!
+                        sound_half_period <= 7778250; -- D#4
+                        time_counter <= 0;
+                        sound_cycles <= 310;
+                        sound_cycles_counter <= 0;
+                        play_sound <= '1';
                     -- Inimigo foi alvejado
                     ELSIF enemy_ship_hit = '1'
-                        -- DESTROY!
+                        sound_half_period <= 11000000; -- A4
+                        time_counter <= 0;
+                        sound_cycles <= 440;
+                        sound_cycles_counter <= 0;
+                        play_sound <= '1';
                     END IF;
                 ELSIF game_status = 1 and prev_game_status != 1 THEN
-                    -- Início do jogo
+                    sound_half_period <= 9800000; -- G4
+                    time_counter <= 0;
+                    sound_cycles <= 1568;
+                    sound_cycles_counter <= 0;
+                    play_sound <= '1';
                 ELSIF game_status = 3 and prev_game_status != 3 THEN
-                    -- Game over :(
+                    sound_half_period <= 11654000; -- Bb4
+                    time_counter <= 0;
+                    sound_cycles <= 1865;
+                    sound_cycles_counter <= 0;
+                    play_sound <= '1';
                 ELSE
                     play_sound = '0';
                 END IF;

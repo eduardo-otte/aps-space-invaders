@@ -63,14 +63,70 @@ BEGIN
 							end if;
 						end loop;
 						volatile_enemy_ships_x(0) := 1*(ENEMY_SIZE+20);
-						volatile_enemy_ships_x(1) := 2*(ENEMY_SIZE+20);
-						volatile_enemy_ships_x(2) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(1) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(2) := 5*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(3) := 1*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(4) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(5) := 5*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(6) := 1*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(7) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(8) := 5*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(0) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(1) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(2) := 1*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(3) := 2*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(4) := 2*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(5) := 2*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(6) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(7) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(8) := 3*(ENEMY_SIZE+20);
+						
+						volatile_living_ships := LINES_IN_Y_AT_LV1*NUM_MAX_ENEMY_PER_LINE;
+						should_go_right := '0';
+					if level = 2 then
+						for i in 0 to NUM_MAX_ENEMY-1 loop
+							if volatile_enemy_ships_y(i) /= -1 then
+								volatile_enemy_ships_y(i) := -1;
+								volatile_enemy_ships_x(i) := -1;
+							end if;
+						end loop;
+						volatile_enemy_ships_x(0) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(1) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(2) := 5*(ENEMY_SIZE+20);
 						volatile_enemy_ships_x(3) := 1*(ENEMY_SIZE+20);
-						volatile_enemy_ships_x(4) := 2*(ENEMY_SIZE+20);
-						volatile_enemy_ships_x(5) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(4) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(5) := 5*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(6) := 1*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(7) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_x(8) := 5*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(0) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(1) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(2) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(3) := 2*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(4) := 2*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(5) := 2*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(6) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(7) := 3*(ENEMY_SIZE+20);
+						--volatile_enemy_ships_y(8) := 3*(ENEMY_SIZE+20);
+						
+						volatile_living_ships := LINES_IN_Y_AT_LV1*NUM_MAX_ENEMY_PER_LINE;
+						should_go_right := '0';
+					if level = 3 then
+						for i in 0 to NUM_MAX_ENEMY-1 loop
+							if volatile_enemy_ships_y(i) /= -1 then
+								volatile_enemy_ships_y(i) := -1;
+								volatile_enemy_ships_x(i) := -1;
+							end if;
+						end loop;
+						volatile_enemy_ships_x(0) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(1) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(2) := 4*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(3) := 1*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(4) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(5) := 5*(ENEMY_SIZE+20);
 						volatile_enemy_ships_x(6) := 1*(ENEMY_SIZE+20);
-						volatile_enemy_ships_x(7) := 2*(ENEMY_SIZE+20);
-						--volatile_enemy_ships_x(8) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(7) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_x(8) := 5*(ENEMY_SIZE+20);
 						volatile_enemy_ships_y(0) := 1*(ENEMY_SIZE+20);
 						volatile_enemy_ships_y(1) := 1*(ENEMY_SIZE+20);
 						volatile_enemy_ships_y(2) := 1*(ENEMY_SIZE+20);
@@ -79,7 +135,7 @@ BEGIN
 						volatile_enemy_ships_y(5) := 2*(ENEMY_SIZE+20);
 						volatile_enemy_ships_y(6) := 3*(ENEMY_SIZE+20);
 						volatile_enemy_ships_y(7) := 3*(ENEMY_SIZE+20);
-						--volatile_enemy_ships_y(8) := 3*(ENEMY_SIZE+20);
+						volatile_enemy_ships_y(8) := 3*(ENEMY_SIZE+20);
 						
 						volatile_living_ships := LINES_IN_Y_AT_LV1*NUM_MAX_ENEMY_PER_LINE;
 						should_go_right := '0';

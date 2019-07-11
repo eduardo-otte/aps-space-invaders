@@ -6,15 +6,15 @@ use work.integer_vector.all;
 
 Entity enemy_shoot_controller IS
 	generic (
-		NUM_MAX_SHOOT: INTEGER := 15;
-		NUM_MAX_ENEMY: INTEGER := 64;
-		NUMBER_OF_LEVELS: INTEGER := 3
+		NUM_MAX_SHOOT: INTEGER RANGE -10 TO 1200 := 15;
+		NUM_MAX_ENEMY: INTEGER RANGE -10 TO 1200 := 36;
+		NUMBER_OF_LEVELS: INTEGER RANGE 0 TO 5 := 3
 	);
 	port(	
 		clk : IN std_LOGIC;
 		enemy_clock, shot_clock: 		IN STD_LOGIC;
 		enemy_ships_x, enemy_ships_y: 	IN INTEGER_VECTOR((NUM_MAX_ENEMY)-1 downto 0);
-		level:  IN INTEGER;
+		level:  IN INTEGER RANGE 0 TO 5;
 
 		enemy_shots_x: 					OUT INTEGER_VECTOR((NUM_MAX_SHOOT)-1 downto 0);
 		enemy_shots_y: 					OUT INTEGER_VECTOR((NUM_MAX_SHOOT)-1 downto 0)
@@ -24,8 +24,8 @@ END entity;
 Architecture arch OF enemy_shoot_controller IS
 BEGIN
 	process(clk)
-		variable current_enemy_x_position: integer range -10 to 1000 := 0;
-		variable current_enemy_y_position: integer range -10 to 1000 := 0;
+		variable current_enemy_x_position: INTEGER RANGE -10 TO 1200 := 0;
+		variable current_enemy_y_position: INTEGER RANGE -10 TO 1200:= 0;
 		variable last_level: integer := NUMBER_OF_LEVELS+1; -- This number has to be out of number of level of the game
 		variable number_of_shoots_at_screen: integer := 0;
 		-- Auxiliary volatiles
@@ -33,7 +33,7 @@ BEGIN
 		variable volatile_enemy_shots_y : INTEGER_VECTOR((NUM_MAX_SHOOT)-1 downto 0);
 
 		--Random maker
-		variable rand_num : integer;
+		variable rand_num : integer RANGE 0 TO 1000;
 		variable seed : integer := 1;
 		begin
 			if rising_edge(clk) then
@@ -53,9 +53,9 @@ BEGIN
 						-- Checks if enemy is really alive
 						if (enemy_ships_x(i) > 0) and (number_of_shoots_at_screen < 15) then
 							seed := (seed * 7) - 3; -- my random generator
-							rand_num := seed rem NUMBER_OF_LEVELS*3;
+							rand_num := seed+2*NUMBER_OF_LEVELS*3;
 							-- probability if 2/30
-							if rand_num > 27/level then
+							if (rand_num > (2*level)) then
 								-- Implements as a queue so it is impossible to explode the vector
 								-- Uses ship position to the shoots
 								-- MIGHT HAVE BUGS.... IF SOMEHOW A BULLET DISAPPEARS, CALL ME, FAST!

@@ -6,15 +6,15 @@ USE ieee.numeric_std.all;
 ENTITY score_controller IS
     PORT(
         clk : IN STD_LOGIC;
-        level : IN INTEGER;
+        level : IN INTEGER RANGE 0 TO 5;
         enemy_ship_hit_p1 : IN STD_LOGIC;
         enemy_ship_hit_p2 : IN STD_LOGIC;
-        score : OUT INTEGER
+        score : OUT INTEGER RANGE -10 TO 1200
     );
 END;
 
 ARCHITECTURE score_controller OF score_controller IS
-    signal score_signal : INTEGER := 0;
+    signal score_signal : INTEGER RANGE -10 TO 1200 := 0;
 
 BEGIN
     score <= score_signal;

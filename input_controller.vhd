@@ -10,14 +10,14 @@ ENTITY input_controller IS
         move_r : IN STD_LOGIC;
         fire : IN STD_LOGIC;
         fired : OUT STD_LOGIC;
-        movement : OUT INTEGER
+        movement : OUT INTEGER RANGE -10 TO 1200
     );
 END;
 
 ARCHITECTURE input_controller OF input_controller IS
     COMPONENT debounce
 	  GENERIC(
-		 counter_size  :  INTEGER := 23); --counter size (19 bits gives 10.5ms with 50MHz clock)
+		 counter_size  :  INTEGER RANGE -10 TO 1200 := 23); --counter size (19 bits gives 10.5ms with 50MHz clock)
 	  PORT(
 		 clk     : IN  STD_LOGIC;
 		 botao   : IN  STD_LOGIC;
@@ -31,7 +31,7 @@ ARCHITECTURE input_controller OF input_controller IS
 
     -- Output signals
     signal fired_signal : STD_LOGIC := '0';
-    signal movement_signal : INTEGER := 0;
+    signal movement_signal : INTEGER RANGE -10 TO 1200 := 0;
 
 BEGIN
     deb_move_l : debounce
